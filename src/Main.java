@@ -8,6 +8,9 @@ import java.io.InputStreamReader;
      * private fields and getters in EnteringData class, public fields in EnteringRome class*/
 /* Ответы в виде вещественных чисел в случае деления, по условиям операции следующие: +, -, * и /.
 Поэтому исключений для них не создано.
+Касательно возврата римскими цифрами - у римлян не было отрицательных чисел, да и правила вычитания у них особые
++ всегда меньшее вычиталось из большего, также не создавался символ для нуля. Поэтому при режиме римских цифр
+ вывод отрицательного числа и нуля будет игнорироваться (¯\_(ツ)_/¯). Десятичные дроби у римлян также отсутствовали.
 **/
 
     public class Main {
@@ -22,18 +25,23 @@ import java.io.InputStreamReader;
                 EnteringRome romeNumbers = new EnteringRome(strings[0], strings[1], strings[2]);
                 switch (strings[1]){
                     case "+":
-                        System.out.println(romeNumbers.romeNumberOne + romeNumbers.romeNumberTwo);
+                        int responce1 = romeNumbers.romeNumberOne + romeNumbers.romeNumberTwo;
+                        System.out.println(ConvertToRome.TurnToRome(responce1));
                         break;
                     case "-":
-                        System.out.println(romeNumbers.romeNumberOne - romeNumbers.romeNumberTwo);
+                        int responce2 = romeNumbers.romeNumberOne - romeNumbers.romeNumberTwo;
+                        if (responce2 <= 0) {
+                            System.out.println("¯\\_(ツ)_/¯");
+                        } else
+                        System.out.println(ConvertToRome.TurnToRome(responce2));
                         break;
-                    case "/":               // создадим более точный ответ, в виде числа с точкой
-                        double answer;
-                        answer = (double) romeNumbers.romeNumberOne / (double) romeNumbers.romeNumberTwo;
-                        System.out.printf("%.2f", answer);
+                    case "/":
+                        int responce3 = romeNumbers.romeNumberOne / romeNumbers.romeNumberTwo;
+                        System.out.println(ConvertToRome.TurnToRome(responce3));
                         break;
                     case "*":
-                        System.out.println(romeNumbers.romeNumberOne * romeNumbers.romeNumberTwo);
+                        int responce4 = romeNumbers.romeNumberOne * romeNumbers.romeNumberTwo;
+                        System.out.println(ConvertToRome.TurnToRome(responce4));
                         break;
                 }
             }
